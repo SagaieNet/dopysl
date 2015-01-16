@@ -232,7 +232,10 @@ class DoManager(object):
 
 #images==========================================
     def all_images(self, filter='global'):
-        params = {'filter': filter}
+        if self.api_version == 2:
+            params = {'type': filter}
+        else:
+            params = {'filter': filter}
         json = self.request('/images/', params)
         return json['images']
 
